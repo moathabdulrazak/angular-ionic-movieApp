@@ -7,12 +7,16 @@
 <ion-content>
 <ion-list>
   <ion-item button *ngFor="let m of movies " >
+    <ion-avatar>
+      <img [src]="m.poster_path ? imageBaseUrl + '/w92' + m.poster_path : 'assets/images/placeholder.png'">
+    </ion-avatar>
 <ion-label>
   {{m?.title}}
   <p>
     {{m?.release_date | date: 'y'}}
   </p>
 </ion-label>
+<ion-badge slot="end">{{m.vote_average}}</ion-badge>
   </ion-item>
 </ion-list>
 </ion-content>

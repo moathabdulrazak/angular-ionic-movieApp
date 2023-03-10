@@ -9,6 +9,9 @@
   <ion-item button *ngFor="let m of movies " >
 <ion-label>
   {{m?.title}}
+  <p>
+    {{m?.release_date | date: 'y'}}
+  </p>
 </ion-label>
   </ion-item>
 </ion-list>

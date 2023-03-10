@@ -10,26 +10,32 @@ import { environment } from 'src/environments/environment';
 })
 export class MoviesPage implements OnInit {
   movies: any[] = [];
-currentPage = 1;
-imageBaseUrl = environment.images;
-  constructor(private  movieService: MovieService, private loadingCtrl: LoadingController) { }
+  currentPage = 1;
+  imageBaseUrl = environment.images;
+  constructor(private movieService: MovieService, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
-  this.loadMovies()
+    this.loadMovies();
   }
 
-
-  async loadMovies(){
+  async loadMovies(event?: any) {
     const loading = await this.loadingCtrl.create({
       message: 'Loading...',
       spinner: 'bubbles'
     });
     await loading.present();
-    loading.dismiss();
     this.movieService.getTopMovies(this.currentPage).subscribe(res => {
-      this.movies =  [...this.movies, ...res.results]
+      this.movies = [...this.movies, ...res.results];
       console.log(res, "movies");
-      
+      loading.dismiss();
+      if (event) {
+        event.target.complete();
+      }
     })
+  }
+
+  loadMore(event?: any) {
+    this.currentPage++;
+    this.loadMovies(event);
   }
 }

@@ -1,22 +1,32 @@
 <ion-header>
-  <ion-toolbar color="primary" >
+  <ion-toolbar color="primary">
     <ion-title>Trending Movies</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-list>
-  <ion-item button *ngFor="let m of movies " >
-    <ion-avatar>
-      <img [src]="m.poster_path ? imageBaseUrl + '/w92' + m.poster_path : 'assets/images/placeholder.png'">
-    </ion-avatar>
-<ion-label>
-  {{m?.title}}
-  <p>
-    {{m?.release_date | date: 'y'}}
-  </p>
-</ion-label>
-<ion-badge slot="end">{{m.vote_average}}</ion-badge>
-  </ion-item>
-</ion-list>
+  <ion-list>
+    <ion-item button *ngFor="let m of movies">
+      <ion-avatar slot="start">
+        <img [src]="m.poster_path ? imageBaseUrl + '/w92' + m.poster_path : 'assets/images/placeholder.png'">
+      </ion-avatar>
+      <ion-label>
+        {{m?.title}}
+        <p>
+          {{m?.release_date | date: 'y'}}
+        </p>
+      </ion-label>
+      <ion-badge slot="end">{{m.vote_average}}</ion-badge>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll
+  (ionInfinite)="loadMore($event)"
+  threshold="100px"
+  disabled="false"
+>
+  <ion-infinite-scroll-content
+    loadingSpinner="bubbles"
+    loadingText="Loading more data..."
+  ></ion-infinite-scroll-content>
+</ion-infinite-scroll>
 </ion-content>

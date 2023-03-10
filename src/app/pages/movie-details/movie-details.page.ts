@@ -22,4 +22,7 @@ imageBaseUrl = environment.images;
     })
   }
 
+  openHomepage(url: string){
+    window.open(this.movie.homepage);
+  }
 }

@@ -11,11 +11,11 @@ export class MovieService {
 
 
 
-  getTopMovies(): Observable<any>{
-    return this.http.get(`${environment.baseUrl}/movie/popular?api_key=${environment.apiKey}`);
+  getTopMovies(page = 1 ): Observable<any>{
+    return this.http.get(`${environment.baseUrl}/movie/popular?api_key=${environment.apiKey}&${page}`);
   }
 
-  getDetails(){
-
+  getDetails(id: string){
+    return this.http.get(`${environment.baseUrl}/movie/${id}?api_key=${environment.apiKey}`);
   }
 }

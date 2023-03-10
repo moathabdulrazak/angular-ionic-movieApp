@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-movies',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoviesPage implements OnInit {
 
-  constructor() { }
+  constructor(private  movieService: MovieService) { }
 
   ngOnInit() {
+    this.movieService.getTopMovies().subscribe(res => {
+      console.log(res);
+      
+    })
   }
 
 }

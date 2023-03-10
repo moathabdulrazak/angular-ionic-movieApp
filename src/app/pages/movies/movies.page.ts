@@ -25,11 +25,14 @@ export class MoviesPage implements OnInit {
     });
     await loading.present();
     this.movieService.getTopMovies(this.currentPage).subscribe(res => {
-      this.movies = [...this.movies, ...res.results];
+      this.movies.push(...res.results);
       console.log(res, "movies");
       loading.dismiss();
       if (event) {
         event.target.complete();
+      }
+      if(event) {
+        event.target.disabled = res.total_pages === this.currentPage;
       }
     })
   }
